@@ -1,0 +1,237 @@
+[2024-12-08T06:55:18.999+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-08T06:55:19.012+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_ingestion_dag.task_ingest_messages_data manual__2024-12-08T06:55:18.004904+00:00 [queued]>
+[2024-12-08T06:55:19.018+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_ingestion_dag.task_ingest_messages_data manual__2024-12-08T06:55:18.004904+00:00 [queued]>
+[2024-12-08T06:55:19.019+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-12-08T06:55:19.030+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): task_ingest_messages_data> on 2024-12-08 06:55:18.004904+00:00
+[2024-12-08T06:55:19.035+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=150) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-08T06:55:19.037+0000] {standard_task_runner.py:72} INFO - Started process 152 to run task
+[2024-12-08T06:55:19.037+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'data_ingestion_dag', 'task_ingest_messages_data', 'manual__2024-12-08T06:55:18.004904+00:00', '--job-id', '37', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmpkug7e5nx']
+[2024-12-08T06:55:19.039+0000] {standard_task_runner.py:105} INFO - Job 37: Subtask task_ingest_messages_data
+[2024-12-08T06:55:19.071+0000] {task_command.py:467} INFO - Running <TaskInstance: data_ingestion_dag.task_ingest_messages_data manual__2024-12-08T06:55:18.004904+00:00 [running]> on host ad379471be2c
+[2024-12-08T06:55:19.286+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_ingestion_dag' AIRFLOW_CTX_TASK_ID='task_ingest_messages_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-08T06:55:18.004904+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-08T06:55:18.004904+00:00'
+[2024-12-08T06:55:19.287+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-08T06:55:23.791+0000] {base.py:84} INFO - Retrieving connection 'external_postgres'
+[2024-12-08T06:55:25.194+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "l0_messages_pkey"
+DETAIL:  Key (id)=(817411259) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/resources/util_read_insert_data.py", line 26, in load_excel_to_db
+    df.to_sql(table_name, engine, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1507, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 951, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "l0_messages_pkey"
+DETAIL:  Key (id)=(817411259) already exists.
+
+[SQL: INSERT INTO l0_messages (id, message_type, masked_addressees, masked_author, content, author_type, direction, external_id, external_timestamp, masked_from_addr, is_deleted, last_status, last_status_timestamp, rendered_content, source_type, uuid, inserted_at, updated_at) VALUES (%(id)s, %(message_type)s, %(masked_addressees)s, %(masked_author)s, %(content)s, %(author_type)s, %(direction)s, %(external_id)s, %(external_timestamp)s, %(masked_from_addr)s, %(is_deleted)s, %(last_status)s, %(last_status_timestamp)s, %(rendered_content)s, %(source_type)s, %(uuid)s, %(inserted_at)s, %(updated_at)s)]
+[parameters: ({'id': 225827003, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 9814839641451596, 'content': 'छठे माह के बच्चे को क्या दाल का पानी पीला सकते हैं', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkYmCWHJiAhAYMP42_69FGA2CoT8e0Igw', 'external_timestamp': datetime.datetime(2021, 9, 9, 17, 25), 'masked_from_addr': 360699995903664615, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '4e3e6cbd-957f-6fc6-0a31-352359ca0000', 'inserted_at': datetime.datetime(2021, 9, 9, 17, 25, 0, 388000), 'updated_at': datetime.datetime(2021, 9, 9, 17, 25, 0, 388000)}, {'id': 290238495, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 25781471030768533, 'content': 'Ha ek per normal hai', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkYh4aZgWAhCc0KJxm2sPNBWXkl8UYqXC', 'external_timestamp': datetime.datetime(2022, 6, 1, 8, 26, 28), 'masked_from_addr': 1924410226241906500, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '26cfb3d1-7367-c012-7e5e-f3aedf79e2f1', 'inserted_at': datetime.datetime(2022, 6, 1, 8, 26, 28, 188000), 'updated_at': datetime.datetime(2022, 6, 1, 8, 26, 28, 188000)}, {'id': 433591120, 'message_type': 'text', 'masked_addressees': 5867031364740438706, 'masked_author': 31304295617233509, 'content': '⚠️निम्नलिखित लेबर (प्रसव पीड़ा) के लक्षण हैं ⚠️ \n\nजब आपके प्रसव की तारीख़ पास आने वाली हो, तो इन बातों का ध्यान रखें \n\n⚠️पेट दर्द या संकुचन महसूस  ... (68 characters truncated) ... म से संपर्क करें या 108 🚑 पर कॉल करें या अपने स्वयं के वाहन  की व्यवस्था करें, सभी दस्तावेज़ों के साथ अपना तैयार किया हुआ बैग लें और अस्पताल पहुँचें 💼', 'author_type': 'STACK', 'direction': 'outbound', 'external_id': 'gBEGkZgSFlVRAglbUmpDqPhtRgo', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2023, 5, 24, 9, 46, 59), 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '9b888dc2-570d-5296-91b2-422fd74ea6db', 'inserted_at': datetime.datetime(2023, 5, 24, 9, 46, 58, 876000), 'updated_at': datetime.datetime(2023, 5, 24, 9, 46, 59, 821000)}, {'id': 286769759, 'message_type': 'voice', 'masked_addressees': 8316157823254039726, 'masked_author': 34062290787406994, 'content': None, 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZORIpkWAghHCYh-gowJvw', 'external_timestamp': datetime.datetime(2022, 5, 10, 15, 43, 33), 'masked_from_addr': 2372380464914471916, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'd69f4904-7f50-7738-aa15-ffdf2e19cef0', 'inserted_at': datetime.datetime(2022, 5, 10, 15, 43, 34, 339000), 'updated_at': datetime.datetime(2022, 5, 10, 15, 43, 34, 339000)}, {'id': 810101715, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 37128544240125839, 'content': 'Hk', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'wamid.HBgMOTE5NzAxOTc5MjYxFQIAEhggQ0Y0OEJGOUM1NjRBNEI0NTJDQzM1OTZDNDI5RDJCM0EA', 'external_timestamp': datetime.datetime(2024, 3, 31, 16, 36, 11), 'masked_from_addr': 7716078790004740279, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '56fdc7e3-d5c4-383a-4249-af5320759c0c', 'inserted_at': datetime.datetime(2024, 3, 31, 16, 36, 11, 818000), 'updated_at': datetime.datetime(2024, 3, 31, 16, 36, 11, 818000)}, {'id': 562500718, 'message_type': 'text', 'masked_addressees': 6840064760406764152, 'masked_author': 43763456781777221, 'content': 'hello', 'author_type': 'OPERATOR', 'direction': 'outbound', 'external_id': 'gBEGkZF2iIYZAgkLZpOOVx5JQX4', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2023, 9, 27, 12, 49, 23), 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '98f18815-6aa7-732c-a109-f3265378d33e', 'inserted_at': datetime.datetime(2023, 9, 27, 12, 49, 23, 294000), 'updated_at': datetime.datetime(2023, 9, 27, 12, 49, 23, 913000)}, {'id': 200616477, 'message_type': 'text', 'masked_addressees': 3301580771866412427, 'masked_author': 44102066842684651, 'content': 'Khri sarkari scheme aa ji', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZd5cgOJAhDNLGabLS98ypJTnsVAFkfK', 'external_timestamp': datetime.datetime(2021, 5, 28, 15, 57, 33, 201000), 'masked_from_addr': 99406278043849801, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'fbb1d53e-84c0-9c5a-7f79-4fd2ec7f9a95', 'inserted_at': datetime.datetime(2021, 5, 28, 15, 57, 33, 261000), 'updated_at': datetime.datetime(2021, 5, 28, 15, 57, 33, 261000)}, {'id': 424170823, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 44286486964367919, 'content': 'C', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZeAEHeYAhAJEZ_Q1gQ_MmcptbBegrqA', 'external_timestamp': datetime.datetime(2023, 5, 16, 5, 46, 31), 'masked_from_addr': 3566013831381106946, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '3551ef53-3305-fd58-fd09-a7d566fdd76b', 'inserted_at': datetime.datetime(2023, 5, 16, 5, 46, 31, 366000), 'updated_at': datetime.datetime(2023, 5, 16, 5, 46, 31, 366000)}  ... displaying 10 of 14747 total bound parameter sets ...  {'id': 791221541, 'message_type': 'template', 'masked_addressees': 5406616437522208219, 'masked_author': 5196889043629548299, 'content': None, 'author_type': 'SYSTEM', 'direction': 'outbound', 'external_id': 'wamid.HBgMOTE3NDgzODUxNDYzFQIAERgSQTdEREE4RTYyMUFENzUyMTcxAA==', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2024, 3, 17, 12, 21, 18), 'rendered_content': 'ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಇಂದಿನ ಸಂದೇಶ 👉:\n\nಲಸಿಕೆಗಳನ್ನು ಸರಿಯಾದ ವಯಸ್ಸಿನಲ್ಲಿ ನೀಡಿದಾಗ ಮಕ್ಕಳಿಗೆ ಉತ್ತಮ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.\nಪೋಲಿಯೊ, ಟಿ.ಬಿ, ದಡಾರ, ಡಿಫ್ತಿರಿಯಾ, ಪೆರ್ಟುಸಿ ... (292 characters truncated) ...  ಡಿ ) ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಿಂದ ಪಡೆಯಿರಿ. 🏥\n\nತಾಯಿ ಕಾರ್ಡ್\u200cನಲ್ಲಿ ಮುಂದಿನ ಲಸಿಕೆ ದಿನಾಂಕ ನೋಡಿ.\nಲಸಿಕೆ ಹಾಕಿಸಲು ಹೋಗುವಾಗ ಯಾವಾಗಲೂ ತಾಯಿಕಾರ್ಡ್ ತೆಗೆದುಕೊಂಡು ಹೋಗಿ.', 'source_type': 'CHANNEL_MESSAGE', 'uuid': '258ea65d-a0b2-ca5b-04b2-04743f1b378f', 'inserted_at': datetime.datetime(2024, 3, 17, 7, 34, 2, 884000), 'updated_at': datetime.datetime(2024, 3, 17, 12, 21, 18, 478000)}, {'id': 797390708, 'message_type': 'template', 'masked_addressees': 3991667881140380492, 'masked_author': 5196889043629548299, 'content': None, 'author_type': 'SYSTEM', 'direction': 'outbound', 'external_id': 'wamid.HBgMOTE5OTgwMjg4MzE3FQIAERgSRkI1Q0ZFRTY1MDJFOUIyNTExAA==', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2024, 3, 21, 13, 2, 50), 'rendered_content': 'ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಇಂದಿನ ಸಂದೇಶ 👉:\n\nಲಸಿಕೆಗಳನ್ನು ಸರಿಯಾದ ವಯಸ್ಸಿನಲ್ಲಿ ನೀಡಿದಾಗ ಮಕ್ಕಳಿಗೆ ಉತ್ತಮ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.\nಪೋಲಿಯೊ, ಟಿ.ಬಿ, ದಡಾರ, ಡಿಫ್ತಿರಿಯಾ, ಪೆರ್ಟುಸಿ ... (292 characters truncated) ...  ಡಿ ) ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಿಂದ ಪಡೆಯಿರಿ. 🏥\n\nತಾಯಿ ಕಾರ್ಡ್\u200cನಲ್ಲಿ ಮುಂದಿನ ಲಸಿಕೆ ದಿನಾಂಕ ನೋಡಿ.\nಲಸಿಕೆ ಹಾಕಿಸಲು ಹೋಗುವಾಗ ಯಾವಾಗಲೂ ತಾಯಿಕಾರ್ಡ್ ತೆಗೆದುಕೊಂಡು ಹೋಗಿ.', 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'c0e8108b-1317-8d1e-3e4a-4111ed56f769', 'inserted_at': datetime.datetime(2024, 3, 21, 12, 44, 2, 478000), 'updated_at': datetime.datetime(2024, 3, 21, 13, 2, 51, 101000)})]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2024-12-08T06:55:25.206+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=data_ingestion_dag, task_id=task_ingest_messages_data, run_id=manual__2024-12-08T06:55:18.004904+00:00, execution_date=20241208T065518, start_date=20241208T065519, end_date=20241208T065525
+[2024-12-08T06:55:25.216+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-08T06:55:25.217+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 37 for task task_ingest_messages_data ((psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "l0_messages_pkey"
+DETAIL:  Key (id)=(817411259) already exists.
+
+[SQL: INSERT INTO l0_messages (id, message_type, masked_addressees, masked_author, content, author_type, direction, external_id, external_timestamp, masked_from_addr, is_deleted, last_status, last_status_timestamp, rendered_content, source_type, uuid, inserted_at, updated_at) VALUES (%(id)s, %(message_type)s, %(masked_addressees)s, %(masked_author)s, %(content)s, %(author_type)s, %(direction)s, %(external_id)s, %(external_timestamp)s, %(masked_from_addr)s, %(is_deleted)s, %(last_status)s, %(last_status_timestamp)s, %(rendered_content)s, %(source_type)s, %(uuid)s, %(inserted_at)s, %(updated_at)s)]
+[parameters: ({'id': 225827003, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 9814839641451596, 'content': 'छठे माह के बच्चे को क्या दाल का पानी पीला सकते हैं', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkYmCWHJiAhAYMP42_69FGA2CoT8e0Igw', 'external_timestamp': datetime.datetime(2021, 9, 9, 17, 25), 'masked_from_addr': 360699995903664615, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '4e3e6cbd-957f-6fc6-0a31-352359ca0000', 'inserted_at': datetime.datetime(2021, 9, 9, 17, 25, 0, 388000), 'updated_at': datetime.datetime(2021, 9, 9, 17, 25, 0, 388000)}, {'id': 290238495, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 25781471030768533, 'content': 'Ha ek per normal hai', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkYh4aZgWAhCc0KJxm2sPNBWXkl8UYqXC', 'external_timestamp': datetime.datetime(2022, 6, 1, 8, 26, 28), 'masked_from_addr': 1924410226241906500, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '26cfb3d1-7367-c012-7e5e-f3aedf79e2f1', 'inserted_at': datetime.datetime(2022, 6, 1, 8, 26, 28, 188000), 'updated_at': datetime.datetime(2022, 6, 1, 8, 26, 28, 188000)}, {'id': 433591120, 'message_type': 'text', 'masked_addressees': 5867031364740438706, 'masked_author': 31304295617233509, 'content': '⚠️निम्नलिखित लेबर (प्रसव पीड़ा) के लक्षण हैं ⚠️ \n\nजब आपके प्रसव की तारीख़ पास आने वाली हो, तो इन बातों का ध्यान रखें \n\n⚠️पेट दर्द या संकुचन महसूस  ... (68 characters truncated) ... म से संपर्क करें या 108 🚑 पर कॉल करें या अपने स्वयं के वाहन  की व्यवस्था करें, सभी दस्तावेज़ों के साथ अपना तैयार किया हुआ बैग लें और अस्पताल पहुँचें 💼', 'author_type': 'STACK', 'direction': 'outbound', 'external_id': 'gBEGkZgSFlVRAglbUmpDqPhtRgo', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2023, 5, 24, 9, 46, 59), 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '9b888dc2-570d-5296-91b2-422fd74ea6db', 'inserted_at': datetime.datetime(2023, 5, 24, 9, 46, 58, 876000), 'updated_at': datetime.datetime(2023, 5, 24, 9, 46, 59, 821000)}, {'id': 286769759, 'message_type': 'voice', 'masked_addressees': 8316157823254039726, 'masked_author': 34062290787406994, 'content': None, 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZORIpkWAghHCYh-gowJvw', 'external_timestamp': datetime.datetime(2022, 5, 10, 15, 43, 33), 'masked_from_addr': 2372380464914471916, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'd69f4904-7f50-7738-aa15-ffdf2e19cef0', 'inserted_at': datetime.datetime(2022, 5, 10, 15, 43, 34, 339000), 'updated_at': datetime.datetime(2022, 5, 10, 15, 43, 34, 339000)}, {'id': 810101715, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 37128544240125839, 'content': 'Hk', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'wamid.HBgMOTE5NzAxOTc5MjYxFQIAEhggQ0Y0OEJGOUM1NjRBNEI0NTJDQzM1OTZDNDI5RDJCM0EA', 'external_timestamp': datetime.datetime(2024, 3, 31, 16, 36, 11), 'masked_from_addr': 7716078790004740279, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '56fdc7e3-d5c4-383a-4249-af5320759c0c', 'inserted_at': datetime.datetime(2024, 3, 31, 16, 36, 11, 818000), 'updated_at': datetime.datetime(2024, 3, 31, 16, 36, 11, 818000)}, {'id': 562500718, 'message_type': 'text', 'masked_addressees': 6840064760406764152, 'masked_author': 43763456781777221, 'content': 'hello', 'author_type': 'OPERATOR', 'direction': 'outbound', 'external_id': 'gBEGkZF2iIYZAgkLZpOOVx5JQX4', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2023, 9, 27, 12, 49, 23), 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '98f18815-6aa7-732c-a109-f3265378d33e', 'inserted_at': datetime.datetime(2023, 9, 27, 12, 49, 23, 294000), 'updated_at': datetime.datetime(2023, 9, 27, 12, 49, 23, 913000)}, {'id': 200616477, 'message_type': 'text', 'masked_addressees': 3301580771866412427, 'masked_author': 44102066842684651, 'content': 'Khri sarkari scheme aa ji', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZd5cgOJAhDNLGabLS98ypJTnsVAFkfK', 'external_timestamp': datetime.datetime(2021, 5, 28, 15, 57, 33, 201000), 'masked_from_addr': 99406278043849801, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'fbb1d53e-84c0-9c5a-7f79-4fd2ec7f9a95', 'inserted_at': datetime.datetime(2021, 5, 28, 15, 57, 33, 261000), 'updated_at': datetime.datetime(2021, 5, 28, 15, 57, 33, 261000)}, {'id': 424170823, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 44286486964367919, 'content': 'C', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZeAEHeYAhAJEZ_Q1gQ_MmcptbBegrqA', 'external_timestamp': datetime.datetime(2023, 5, 16, 5, 46, 31), 'masked_from_addr': 3566013831381106946, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '3551ef53-3305-fd58-fd09-a7d566fdd76b', 'inserted_at': datetime.datetime(2023, 5, 16, 5, 46, 31, 366000), 'updated_at': datetime.datetime(2023, 5, 16, 5, 46, 31, 366000)}  ... displaying 10 of 14747 total bound parameter sets ...  {'id': 791221541, 'message_type': 'template', 'masked_addressees': 5406616437522208219, 'masked_author': 5196889043629548299, 'content': None, 'author_type': 'SYSTEM', 'direction': 'outbound', 'external_id': 'wamid.HBgMOTE3NDgzODUxNDYzFQIAERgSQTdEREE4RTYyMUFENzUyMTcxAA==', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2024, 3, 17, 12, 21, 18), 'rendered_content': 'ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಇಂದಿನ ಸಂದೇಶ 👉:\n\nಲಸಿಕೆಗಳನ್ನು ಸರಿಯಾದ ವಯಸ್ಸಿನಲ್ಲಿ ನೀಡಿದಾಗ ಮಕ್ಕಳಿಗೆ ಉತ್ತಮ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.\nಪೋಲಿಯೊ, ಟಿ.ಬಿ, ದಡಾರ, ಡಿಫ್ತಿರಿಯಾ, ಪೆರ್ಟುಸಿ ... (292 characters truncated) ...  ಡಿ ) ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಿಂದ ಪಡೆಯಿರಿ. 🏥\n\nತಾಯಿ ಕಾರ್ಡ್\u200cನಲ್ಲಿ ಮುಂದಿನ ಲಸಿಕೆ ದಿನಾಂಕ ನೋಡಿ.\nಲಸಿಕೆ ಹಾಕಿಸಲು ಹೋಗುವಾಗ ಯಾವಾಗಲೂ ತಾಯಿಕಾರ್ಡ್ ತೆಗೆದುಕೊಂಡು ಹೋಗಿ.', 'source_type': 'CHANNEL_MESSAGE', 'uuid': '258ea65d-a0b2-ca5b-04b2-04743f1b378f', 'inserted_at': datetime.datetime(2024, 3, 17, 7, 34, 2, 884000), 'updated_at': datetime.datetime(2024, 3, 17, 12, 21, 18, 478000)}, {'id': 797390708, 'message_type': 'template', 'masked_addressees': 3991667881140380492, 'masked_author': 5196889043629548299, 'content': None, 'author_type': 'SYSTEM', 'direction': 'outbound', 'external_id': 'wamid.HBgMOTE5OTgwMjg4MzE3FQIAERgSRkI1Q0ZFRTY1MDJFOUIyNTExAA==', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2024, 3, 21, 13, 2, 50), 'rendered_content': 'ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಇಂದಿನ ಸಂದೇಶ 👉:\n\nಲಸಿಕೆಗಳನ್ನು ಸರಿಯಾದ ವಯಸ್ಸಿನಲ್ಲಿ ನೀಡಿದಾಗ ಮಕ್ಕಳಿಗೆ ಉತ್ತಮ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.\nಪೋಲಿಯೊ, ಟಿ.ಬಿ, ದಡಾರ, ಡಿಫ್ತಿರಿಯಾ, ಪೆರ್ಟುಸಿ ... (292 characters truncated) ...  ಡಿ ) ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಿಂದ ಪಡೆಯಿರಿ. 🏥\n\nತಾಯಿ ಕಾರ್ಡ್\u200cನಲ್ಲಿ ಮುಂದಿನ ಲಸಿಕೆ ದಿನಾಂಕ ನೋಡಿ.\nಲಸಿಕೆ ಹಾಕಿಸಲು ಹೋಗುವಾಗ ಯಾವಾಗಲೂ ತಾಯಿಕಾರ್ಡ್ ತೆಗೆದುಕೊಂಡು ಹೋಗಿ.', 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'c0e8108b-1317-8d1e-3e4a-4111ed56f769', 'inserted_at': datetime.datetime(2024, 3, 21, 12, 44, 2, 478000), 'updated_at': datetime.datetime(2024, 3, 21, 13, 2, 51, 101000)})]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 152)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "l0_messages_pkey"
+DETAIL:  Key (id)=(817411259) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/resources/util_read_insert_data.py", line 26, in load_excel_to_db
+    df.to_sql(table_name, engine, if_exists='append', index=False)
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1507, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 951, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "l0_messages_pkey"
+DETAIL:  Key (id)=(817411259) already exists.
+
+[SQL: INSERT INTO l0_messages (id, message_type, masked_addressees, masked_author, content, author_type, direction, external_id, external_timestamp, masked_from_addr, is_deleted, last_status, last_status_timestamp, rendered_content, source_type, uuid, inserted_at, updated_at) VALUES (%(id)s, %(message_type)s, %(masked_addressees)s, %(masked_author)s, %(content)s, %(author_type)s, %(direction)s, %(external_id)s, %(external_timestamp)s, %(masked_from_addr)s, %(is_deleted)s, %(last_status)s, %(last_status_timestamp)s, %(rendered_content)s, %(source_type)s, %(uuid)s, %(inserted_at)s, %(updated_at)s)]
+[parameters: ({'id': 225827003, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 9814839641451596, 'content': 'छठे माह के बच्चे को क्या दाल का पानी पीला सकते हैं', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkYmCWHJiAhAYMP42_69FGA2CoT8e0Igw', 'external_timestamp': datetime.datetime(2021, 9, 9, 17, 25), 'masked_from_addr': 360699995903664615, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '4e3e6cbd-957f-6fc6-0a31-352359ca0000', 'inserted_at': datetime.datetime(2021, 9, 9, 17, 25, 0, 388000), 'updated_at': datetime.datetime(2021, 9, 9, 17, 25, 0, 388000)}, {'id': 290238495, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 25781471030768533, 'content': 'Ha ek per normal hai', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkYh4aZgWAhCc0KJxm2sPNBWXkl8UYqXC', 'external_timestamp': datetime.datetime(2022, 6, 1, 8, 26, 28), 'masked_from_addr': 1924410226241906500, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '26cfb3d1-7367-c012-7e5e-f3aedf79e2f1', 'inserted_at': datetime.datetime(2022, 6, 1, 8, 26, 28, 188000), 'updated_at': datetime.datetime(2022, 6, 1, 8, 26, 28, 188000)}, {'id': 433591120, 'message_type': 'text', 'masked_addressees': 5867031364740438706, 'masked_author': 31304295617233509, 'content': '⚠️निम्नलिखित लेबर (प्रसव पीड़ा) के लक्षण हैं ⚠️ \n\nजब आपके प्रसव की तारीख़ पास आने वाली हो, तो इन बातों का ध्यान रखें \n\n⚠️पेट दर्द या संकुचन महसूस  ... (68 characters truncated) ... म से संपर्क करें या 108 🚑 पर कॉल करें या अपने स्वयं के वाहन  की व्यवस्था करें, सभी दस्तावेज़ों के साथ अपना तैयार किया हुआ बैग लें और अस्पताल पहुँचें 💼', 'author_type': 'STACK', 'direction': 'outbound', 'external_id': 'gBEGkZgSFlVRAglbUmpDqPhtRgo', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2023, 5, 24, 9, 46, 59), 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '9b888dc2-570d-5296-91b2-422fd74ea6db', 'inserted_at': datetime.datetime(2023, 5, 24, 9, 46, 58, 876000), 'updated_at': datetime.datetime(2023, 5, 24, 9, 46, 59, 821000)}, {'id': 286769759, 'message_type': 'voice', 'masked_addressees': 8316157823254039726, 'masked_author': 34062290787406994, 'content': None, 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZORIpkWAghHCYh-gowJvw', 'external_timestamp': datetime.datetime(2022, 5, 10, 15, 43, 33), 'masked_from_addr': 2372380464914471916, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'd69f4904-7f50-7738-aa15-ffdf2e19cef0', 'inserted_at': datetime.datetime(2022, 5, 10, 15, 43, 34, 339000), 'updated_at': datetime.datetime(2022, 5, 10, 15, 43, 34, 339000)}, {'id': 810101715, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 37128544240125839, 'content': 'Hk', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'wamid.HBgMOTE5NzAxOTc5MjYxFQIAEhggQ0Y0OEJGOUM1NjRBNEI0NTJDQzM1OTZDNDI5RDJCM0EA', 'external_timestamp': datetime.datetime(2024, 3, 31, 16, 36, 11), 'masked_from_addr': 7716078790004740279, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '56fdc7e3-d5c4-383a-4249-af5320759c0c', 'inserted_at': datetime.datetime(2024, 3, 31, 16, 36, 11, 818000), 'updated_at': datetime.datetime(2024, 3, 31, 16, 36, 11, 818000)}, {'id': 562500718, 'message_type': 'text', 'masked_addressees': 6840064760406764152, 'masked_author': 43763456781777221, 'content': 'hello', 'author_type': 'OPERATOR', 'direction': 'outbound', 'external_id': 'gBEGkZF2iIYZAgkLZpOOVx5JQX4', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2023, 9, 27, 12, 49, 23), 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '98f18815-6aa7-732c-a109-f3265378d33e', 'inserted_at': datetime.datetime(2023, 9, 27, 12, 49, 23, 294000), 'updated_at': datetime.datetime(2023, 9, 27, 12, 49, 23, 913000)}, {'id': 200616477, 'message_type': 'text', 'masked_addressees': 3301580771866412427, 'masked_author': 44102066842684651, 'content': 'Khri sarkari scheme aa ji', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZd5cgOJAhDNLGabLS98ypJTnsVAFkfK', 'external_timestamp': datetime.datetime(2021, 5, 28, 15, 57, 33, 201000), 'masked_from_addr': 99406278043849801, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'fbb1d53e-84c0-9c5a-7f79-4fd2ec7f9a95', 'inserted_at': datetime.datetime(2021, 5, 28, 15, 57, 33, 261000), 'updated_at': datetime.datetime(2021, 5, 28, 15, 57, 33, 261000)}, {'id': 424170823, 'message_type': 'text', 'masked_addressees': 8316157823254039726, 'masked_author': 44286486964367919, 'content': 'C', 'author_type': 'OWNER', 'direction': 'inbound', 'external_id': 'ABEGkZeAEHeYAhAJEZ_Q1gQ_MmcptbBegrqA', 'external_timestamp': datetime.datetime(2023, 5, 16, 5, 46, 31), 'masked_from_addr': 3566013831381106946, 'is_deleted': None, 'last_status': None, 'last_status_timestamp': None, 'rendered_content': None, 'source_type': 'CHANNEL_MESSAGE', 'uuid': '3551ef53-3305-fd58-fd09-a7d566fdd76b', 'inserted_at': datetime.datetime(2023, 5, 16, 5, 46, 31, 366000), 'updated_at': datetime.datetime(2023, 5, 16, 5, 46, 31, 366000)}  ... displaying 10 of 14747 total bound parameter sets ...  {'id': 791221541, 'message_type': 'template', 'masked_addressees': 5406616437522208219, 'masked_author': 5196889043629548299, 'content': None, 'author_type': 'SYSTEM', 'direction': 'outbound', 'external_id': 'wamid.HBgMOTE3NDgzODUxNDYzFQIAERgSQTdEREE4RTYyMUFENzUyMTcxAA==', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2024, 3, 17, 12, 21, 18), 'rendered_content': 'ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಇಂದಿನ ಸಂದೇಶ 👉:\n\nಲಸಿಕೆಗಳನ್ನು ಸರಿಯಾದ ವಯಸ್ಸಿನಲ್ಲಿ ನೀಡಿದಾಗ ಮಕ್ಕಳಿಗೆ ಉತ್ತಮ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.\nಪೋಲಿಯೊ, ಟಿ.ಬಿ, ದಡಾರ, ಡಿಫ್ತಿರಿಯಾ, ಪೆರ್ಟುಸಿ ... (292 characters truncated) ...  ಡಿ ) ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಿಂದ ಪಡೆಯಿರಿ. 🏥\n\nತಾಯಿ ಕಾರ್ಡ್\u200cನಲ್ಲಿ ಮುಂದಿನ ಲಸಿಕೆ ದಿನಾಂಕ ನೋಡಿ.\nಲಸಿಕೆ ಹಾಕಿಸಲು ಹೋಗುವಾಗ ಯಾವಾಗಲೂ ತಾಯಿಕಾರ್ಡ್ ತೆಗೆದುಕೊಂಡು ಹೋಗಿ.', 'source_type': 'CHANNEL_MESSAGE', 'uuid': '258ea65d-a0b2-ca5b-04b2-04743f1b378f', 'inserted_at': datetime.datetime(2024, 3, 17, 7, 34, 2, 884000), 'updated_at': datetime.datetime(2024, 3, 17, 12, 21, 18, 478000)}, {'id': 797390708, 'message_type': 'template', 'masked_addressees': 3991667881140380492, 'masked_author': 5196889043629548299, 'content': None, 'author_type': 'SYSTEM', 'direction': 'outbound', 'external_id': 'wamid.HBgMOTE5OTgwMjg4MzE3FQIAERgSRkI1Q0ZFRTY1MDJFOUIyNTExAA==', 'external_timestamp': None, 'masked_from_addr': 4454300900215722365, 'is_deleted': None, 'last_status': 'read', 'last_status_timestamp': datetime.datetime(2024, 3, 21, 13, 2, 50), 'rendered_content': 'ನಿಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಇಂದಿನ ಸಂದೇಶ 👉:\n\nಲಸಿಕೆಗಳನ್ನು ಸರಿಯಾದ ವಯಸ್ಸಿನಲ್ಲಿ ನೀಡಿದಾಗ ಮಕ್ಕಳಿಗೆ ಉತ್ತಮ ರಕ್ಷಣೆ ಸಿಗುತ್ತದೆ.\nಪೋಲಿಯೊ, ಟಿ.ಬಿ, ದಡಾರ, ಡಿಫ್ತಿರಿಯಾ, ಪೆರ್ಟುಸಿ ... (292 characters truncated) ...  ಡಿ ) ಆರೋಗ್ಯ ಕಾರ್ಯಕರ್ತರಿಂದ ಪಡೆಯಿರಿ. 🏥\n\nತಾಯಿ ಕಾರ್ಡ್\u200cನಲ್ಲಿ ಮುಂದಿನ ಲಸಿಕೆ ದಿನಾಂಕ ನೋಡಿ.\nಲಸಿಕೆ ಹಾಕಿಸಲು ಹೋಗುವಾಗ ಯಾವಾಗಲೂ ತಾಯಿಕಾರ್ಡ್ ತೆಗೆದುಕೊಂಡು ಹೋಗಿ.', 'source_type': 'CHANNEL_MESSAGE', 'uuid': 'c0e8108b-1317-8d1e-3e4a-4111ed56f769', 'inserted_at': datetime.datetime(2024, 3, 21, 12, 44, 2, 478000), 'updated_at': datetime.datetime(2024, 3, 21, 13, 2, 51, 101000)})]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2024-12-08T06:55:25.266+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-08T06:55:25.284+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-08T06:55:25.286+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

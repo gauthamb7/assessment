@@ -1,0 +1,176 @@
+[2024-12-09T05:07:43.997+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T05:07:44.017+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_ingestion_dag.task_transform_visualise manual__2024-12-09T05:01:42.559651+00:00 [queued]>
+[2024-12-09T05:07:44.027+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_ingestion_dag.task_transform_visualise manual__2024-12-09T05:01:42.559651+00:00 [queued]>
+[2024-12-09T05:07:44.028+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-12-09T05:07:44.044+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): task_transform_visualise> on 2024-12-09 05:01:42.559651+00:00
+[2024-12-09T05:07:44.051+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2776) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T05:07:44.053+0000] {standard_task_runner.py:72} INFO - Started process 2778 to run task
+[2024-12-09T05:07:44.054+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'data_ingestion_dag', 'task_transform_visualise', 'manual__2024-12-09T05:01:42.559651+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmpqrce9rhy']
+[2024-12-09T05:07:44.058+0000] {standard_task_runner.py:105} INFO - Job 55: Subtask task_transform_visualise
+[2024-12-09T05:07:44.109+0000] {task_command.py:467} INFO - Running <TaskInstance: data_ingestion_dag.task_transform_visualise manual__2024-12-09T05:01:42.559651+00:00 [running]> on host 58979770e908
+[2024-12-09T05:07:44.203+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_ingestion_dag' AIRFLOW_CTX_TASK_ID='task_transform_visualise' AIRFLOW_CTX_EXECUTION_DATE='2024-12-09T05:01:42.559651+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-09T05:01:42.559651+00:00'
+[2024-12-09T05:07:44.205+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T05:07:44.220+0000] {execute.py:83} INFO - Input Notebook:  /opt/***/dataset/transformation_visualisation.ipynb
+[2024-12-09T05:07:44.221+0000] {execute.py:84} INFO - Output Notebook: /opt/***/dataset/output_transformation_visualisation.ipynb
+[2024-12-09T05:07:44.296+0000] {logging_mixin.py:190} WARNING - Executing:   0%|          | 0/44 [00:00<?, ?cell/s]
+[2024-12-09T05:07:46.304+0000] {clientwrap.py:44} INFO - Executing notebook with kernel: python3
+[2024-12-09T05:07:46.346+0000] {logging_mixin.py:190} WARNING - Executing:   2%|2         | 1/44 [00:02<01:28,  2.05s/cell]
+[2024-12-09T05:07:46.984+0000] {logging_mixin.py:190} WARNING - Executing:   9%|9         | 4/44 [00:02<00:22,  1.79cell/s]
+[2024-12-09T05:07:47.321+0000] {logging_mixin.py:190} WARNING - Executing:  14%|#3        | 6/44 [00:03<00:14,  2.57cell/s]
+[2024-12-09T05:07:47.745+0000] {logging_mixin.py:190} WARNING - Executing:  14%|#3        | 6/44 [00:03<00:21,  1.74cell/s]
+[2024-12-09T05:07:47.789+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/resources/util_read_insert_data.py", line 17, in process_notebook_and_generate_csv
+    pm.execute_notebook(
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 131, in execute_notebook
+    raise_for_execution_errors(nb, output_path)
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+    raise error
+papermill.exceptions.PapermillExecutionError: 
+---------------------------------------------------------------------------
+Exception encountered at "In [5]":
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[5], line 1
+----> 1 engine = get_database_connection()
+      2 # ! jupyter notebook --ServerApp.iopub_data_rate_limit=10000000
+
+Cell In[3], line 34, in get_database_connection(env_path)
+     32 missing_keys = [key for key, value in db_config.items() if value is None]
+     33 if missing_keys:
+---> 34     raise ValueError(f"Missing required database configuration keys: {', '.join(missing_keys)}")
+     36 engine = create_engine(
+     37     f"postgresql://{db_config['username']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
+     38 )
+     40 #Testing the connection
+
+ValueError: Missing required database configuration keys: username, password, database
+
+[2024-12-09T05:07:47.810+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=data_ingestion_dag, task_id=task_transform_visualise, run_id=manual__2024-12-09T05:01:42.559651+00:00, execution_date=20241209T050142, start_date=20241209T050744, end_date=20241209T050747
+[2024-12-09T05:07:47.838+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T05:07:47.840+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 55 for task task_transform_visualise (
+---------------------------------------------------------------------------
+Exception encountered at "In [5]":
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[5], line 1
+----> 1 engine = get_database_connection()
+      2 # ! jupyter notebook --ServerApp.iopub_data_rate_limit=10000000
+
+Cell In[3], line 34, in get_database_connection(env_path)
+     32 missing_keys = [key for key, value in db_config.items() if value is None]
+     33 if missing_keys:
+---> 34     raise ValueError(f"Missing required database configuration keys: {', '.join(missing_keys)}")
+     36 engine = create_engine(
+     37     f"postgresql://{db_config['username']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
+     38 )
+     40 #Testing the connection
+
+ValueError: Missing required database configuration keys: username, password, database
+; 2778)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/resources/util_read_insert_data.py", line 17, in process_notebook_and_generate_csv
+    pm.execute_notebook(
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 131, in execute_notebook
+    raise_for_execution_errors(nb, output_path)
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+    raise error
+papermill.exceptions.PapermillExecutionError: 
+---------------------------------------------------------------------------
+Exception encountered at "In [5]":
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+Cell In[5], line 1
+----> 1 engine = get_database_connection()
+      2 # ! jupyter notebook --ServerApp.iopub_data_rate_limit=10000000
+
+Cell In[3], line 34, in get_database_connection(env_path)
+     32 missing_keys = [key for key, value in db_config.items() if value is None]
+     33 if missing_keys:
+---> 34     raise ValueError(f"Missing required database configuration keys: {', '.join(missing_keys)}")
+     36 engine = create_engine(
+     37     f"postgresql://{db_config['username']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}"
+     38 )
+     40 #Testing the connection
+
+ValueError: Missing required database configuration keys: username, password, database
+
+[2024-12-09T05:07:47.894+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T05:07:47.930+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T05:07:47.934+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

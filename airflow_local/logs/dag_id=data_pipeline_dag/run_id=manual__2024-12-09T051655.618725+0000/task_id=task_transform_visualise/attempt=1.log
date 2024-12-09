@@ -1,0 +1,1022 @@
+[2024-12-09T05:18:11.817+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T05:18:11.834+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_pipeline_dag.task_transform_visualise manual__2024-12-09T05:16:55.618725+00:00 [queued]>
+[2024-12-09T05:18:11.841+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_pipeline_dag.task_transform_visualise manual__2024-12-09T05:16:55.618725+00:00 [queued]>
+[2024-12-09T05:18:11.843+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-12-09T05:18:11.856+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): task_transform_visualise> on 2024-12-09 05:16:55.618725+00:00
+[2024-12-09T05:18:11.863+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=220) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T05:18:11.865+0000] {standard_task_runner.py:72} INFO - Started process 222 to run task
+[2024-12-09T05:18:11.865+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'data_pipeline_dag', 'task_transform_visualise', 'manual__2024-12-09T05:16:55.618725+00:00', '--job-id', '61', '--raw', '--subdir', 'DAGS_FOLDER/e2e_pipeline.py', '--cfg-path', '/tmp/tmp_l0nwkk8']
+[2024-12-09T05:18:11.868+0000] {standard_task_runner.py:105} INFO - Job 61: Subtask task_transform_visualise
+[2024-12-09T05:18:11.916+0000] {task_command.py:467} INFO - Running <TaskInstance: data_pipeline_dag.task_transform_visualise manual__2024-12-09T05:16:55.618725+00:00 [running]> on host d1b18052a0fe
+[2024-12-09T05:18:12.006+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_pipeline_dag' AIRFLOW_CTX_TASK_ID='task_transform_visualise' AIRFLOW_CTX_EXECUTION_DATE='2024-12-09T05:16:55.618725+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-09T05:16:55.618725+00:00'
+[2024-12-09T05:18:12.007+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T05:18:12.021+0000] {execute.py:83} INFO - Input Notebook:  /opt/***/dataset/transformation_visualisation.ipynb
+[2024-12-09T05:18:12.022+0000] {execute.py:84} INFO - Output Notebook: /opt/***/dataset/output_transformation_visualisation.ipynb
+[2024-12-09T05:18:12.092+0000] {logging_mixin.py:190} WARNING - Executing:   0%|          | 0/44 [00:00<?, ?cell/s]
+[2024-12-09T05:18:13.770+0000] {clientwrap.py:44} INFO - Executing notebook with kernel: python3
+[2024-12-09T05:18:13.806+0000] {logging_mixin.py:190} WARNING - Executing:   2%|2         | 1/44 [00:01<01:13,  1.71s/cell]
+[2024-12-09T05:18:14.439+0000] {logging_mixin.py:190} WARNING - Executing:   9%|9         | 4/44 [00:02<00:19,  2.02cell/s]
+[2024-12-09T05:18:15.344+0000] {logging_mixin.py:190} WARNING - Executing:  14%|#3        | 6/44 [00:03<00:18,  2.10cell/s]
+[2024-12-09T05:18:17.173+0000] {logging_mixin.py:190} WARNING - Executing:  14%|#3        | 6/44 [00:05<00:32,  1.18cell/s]
+[2024-12-09T05:18:17.219+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/resources/util_read_insert_data.py", line 17, in process_notebook_and_generate_csv
+    pm.execute_notebook(
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 131, in execute_notebook
+    raise_for_execution_errors(nb, output_path)
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+    raise error
+papermill.exceptions.PapermillExecutionError: 
+---------------------------------------------------------------------------
+Exception encountered at "In [5]":
+---------------------------------------------------------------------------
+OperationalError                          Traceback (most recent call last)
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3371, in Engine._wrap_pool_connect(self, fn, connection)
+   3370 try:
+-> 3371     return fn()
+   3372 except dialect.dbapi.Error as e:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:327, in Pool.connect(self)
+    320 """Return a DBAPI connection from the pool.
+    321 
+    322 The connection is instrumented such that when its
+   (...)
+    325 
+    326 """
+--> 327 return _ConnectionFairy._checkout(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:894, in _ConnectionFairy._checkout(cls, pool, threadconns, fairy)
+    893 if not fairy:
+--> 894     fairy = _ConnectionRecord.checkout(pool)
+    896     fairy._pool = pool
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:493, in _ConnectionRecord.checkout(cls, pool)
+    491 @classmethod
+    492 def checkout(cls, pool):
+--> 493     rec = pool._do_get()
+    494     try:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:145, in QueuePool._do_get(self)
+    144 except:
+--> 145     with util.safe_reraise():
+    146         self._dec_overflow()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:143, in QueuePool._do_get(self)
+    142 try:
+--> 143     return self._create_connection()
+    144 except:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:273, in Pool._create_connection(self)
+    271 """Called by subclasses to create a new ConnectionRecord."""
+--> 273 return _ConnectionRecord(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:388, in _ConnectionRecord.__init__(self, pool, connect)
+    387 if connect:
+--> 388     self.__connect()
+    389 self.finalize_callback = deque()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:690, in _ConnectionRecord.__connect(self)
+    689 except BaseException as e:
+--> 690     with util.safe_reraise():
+    691         pool.logger.debug("Error on connect(): %s", e)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:686, in _ConnectionRecord.__connect(self)
+    685 self.starttime = time.time()
+--> 686 self.dbapi_connection = connection = pool._invoke_creator(self)
+    687 pool.logger.debug("Created new connection %r", connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py:574, in create_engine.<locals>.connect(connection_record)
+    573             return connection
+--> 574 return dialect.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py:598, in DefaultDialect.connect(self, *cargs, **cparams)
+    596 def connect(self, *cargs, **cparams):
+    597     # inherits the docstring from interfaces.Dialect.connect
+--> 598     return self.dbapi.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/psycopg2/__init__.py:122, in connect(dsn, connection_factory, cursor_factory, **kwargs)
+    121 dsn = _ext.make_dsn(dsn, **kwargs)
+--> 122 conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    123 if cursor_factory is not None:
+
+OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+OperationalError                          Traceback (most recent call last)
+Cell In[3], line 42, in get_database_connection(env_path)
+     41 try:
+---> 42     test_connection(engine)
+     43     print("Database connection tested successfully!")
+
+Cell In[3], line 17, in get_database_connection.<locals>.test_connection(engine)
+     14 """
+     15 Tests the database connection by executing a simple query.
+     16 """
+---> 17 with engine.connect() as connection:
+     18     connection.execute(text("SELECT 1"))
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3325, in Engine.connect(self, close_with_result)
+   3311 """Return a new :class:`_engine.Connection` object.
+   3312 
+   3313 The :class:`_engine.Connection` object is a facade that uses a DBAPI
+   (...)
+   3322 
+   3323 """
+-> 3325 return self._connection_cls(self, close_with_result=close_with_result)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:96, in Connection.__init__(self, engine, connection, close_with_result, _branch_from, _execution_options, _dispatch, _has_events, _allow_revalidate)
+     92 else:
+     93     self._dbapi_connection = (
+     94         connection
+     95         if connection is not None
+---> 96         else engine.raw_connection()
+     97     )
+     99     self._transaction = self._nested_transaction = None
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3404, in Engine.raw_connection(self, _connection)
+   3383 """Return a "raw" DBAPI connection from the connection pool.
+   3384 
+   3385 The returned object is a proxied version of the DBAPI
+   (...)
+   3402 
+   3403 """
+-> 3404 return self._wrap_pool_connect(self.pool.connect, _connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3374, in Engine._wrap_pool_connect(self, fn, connection)
+   3373 if connection is None:
+-> 3374     Connection._handle_dbapi_exception_noconnection(
+   3375         e, dialect, self
+   3376     )
+   3377 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:2208, in Connection._handle_dbapi_exception_noconnection(cls, e, dialect, engine)
+   2207 elif should_wrap:
+-> 2208     util.raise_(
+   2209         sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+   2210     )
+   2211 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3371, in Engine._wrap_pool_connect(self, fn, connection)
+   3370 try:
+-> 3371     return fn()
+   3372 except dialect.dbapi.Error as e:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:327, in Pool.connect(self)
+    320 """Return a DBAPI connection from the pool.
+    321 
+    322 The connection is instrumented such that when its
+   (...)
+    325 
+    326 """
+--> 327 return _ConnectionFairy._checkout(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:894, in _ConnectionFairy._checkout(cls, pool, threadconns, fairy)
+    893 if not fairy:
+--> 894     fairy = _ConnectionRecord.checkout(pool)
+    896     fairy._pool = pool
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:493, in _ConnectionRecord.checkout(cls, pool)
+    491 @classmethod
+    492 def checkout(cls, pool):
+--> 493     rec = pool._do_get()
+    494     try:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:145, in QueuePool._do_get(self)
+    144 except:
+--> 145     with util.safe_reraise():
+    146         self._dec_overflow()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:143, in QueuePool._do_get(self)
+    142 try:
+--> 143     return self._create_connection()
+    144 except:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:273, in Pool._create_connection(self)
+    271 """Called by subclasses to create a new ConnectionRecord."""
+--> 273 return _ConnectionRecord(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:388, in _ConnectionRecord.__init__(self, pool, connect)
+    387 if connect:
+--> 388     self.__connect()
+    389 self.finalize_callback = deque()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:690, in _ConnectionRecord.__connect(self)
+    689 except BaseException as e:
+--> 690     with util.safe_reraise():
+    691         pool.logger.debug("Error on connect(): %s", e)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:686, in _ConnectionRecord.__connect(self)
+    685 self.starttime = time.time()
+--> 686 self.dbapi_connection = connection = pool._invoke_creator(self)
+    687 pool.logger.debug("Created new connection %r", connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py:574, in create_engine.<locals>.connect(connection_record)
+    573             return connection
+--> 574 return dialect.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py:598, in DefaultDialect.connect(self, *cargs, **cparams)
+    596 def connect(self, *cargs, **cparams):
+    597     # inherits the docstring from interfaces.Dialect.connect
+--> 598     return self.dbapi.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/psycopg2/__init__.py:122, in connect(dsn, connection_factory, cursor_factory, **kwargs)
+    121 dsn = _ext.make_dsn(dsn, **kwargs)
+--> 122 conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    123 if cursor_factory is not None:
+
+OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+ConnectionError                           Traceback (most recent call last)
+Cell In[5], line 1
+----> 1 engine = get_database_connection()
+      2 # ! jupyter notebook --ServerApp.iopub_data_rate_limit=10000000
+
+Cell In[3], line 45, in get_database_connection(env_path)
+     43     print("Database connection tested successfully!")
+     44 except OperationalError as e:
+---> 45     raise ConnectionError(f"Database connection test failed: {e}")
+     47 return engine
+
+ConnectionError: Database connection test failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+
+[2024-12-09T05:18:17.235+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=data_pipeline_dag, task_id=task_transform_visualise, run_id=manual__2024-12-09T05:16:55.618725+00:00, execution_date=20241209T051655, start_date=20241209T051811, end_date=20241209T051817
+[2024-12-09T05:18:17.249+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T05:18:17.249+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 61 for task task_transform_visualise (
+---------------------------------------------------------------------------
+Exception encountered at "In [5]":
+---------------------------------------------------------------------------
+OperationalError                          Traceback (most recent call last)
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3371, in Engine._wrap_pool_connect(self, fn, connection)
+   3370 try:
+-> 3371     return fn()
+   3372 except dialect.dbapi.Error as e:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:327, in Pool.connect(self)
+    320 """Return a DBAPI connection from the pool.
+    321 
+    322 The connection is instrumented such that when its
+   (...)
+    325 
+    326 """
+--> 327 return _ConnectionFairy._checkout(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:894, in _ConnectionFairy._checkout(cls, pool, threadconns, fairy)
+    893 if not fairy:
+--> 894     fairy = _ConnectionRecord.checkout(pool)
+    896     fairy._pool = pool
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:493, in _ConnectionRecord.checkout(cls, pool)
+    491 @classmethod
+    492 def checkout(cls, pool):
+--> 493     rec = pool._do_get()
+    494     try:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:145, in QueuePool._do_get(self)
+    144 except:
+--> 145     with util.safe_reraise():
+    146         self._dec_overflow()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:143, in QueuePool._do_get(self)
+    142 try:
+--> 143     return self._create_connection()
+    144 except:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:273, in Pool._create_connection(self)
+    271 """Called by subclasses to create a new ConnectionRecord."""
+--> 273 return _ConnectionRecord(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:388, in _ConnectionRecord.__init__(self, pool, connect)
+    387 if connect:
+--> 388     self.__connect()
+    389 self.finalize_callback = deque()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:690, in _ConnectionRecord.__connect(self)
+    689 except BaseException as e:
+--> 690     with util.safe_reraise():
+    691         pool.logger.debug("Error on connect(): %s", e)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:686, in _ConnectionRecord.__connect(self)
+    685 self.starttime = time.time()
+--> 686 self.dbapi_connection = connection = pool._invoke_creator(self)
+    687 pool.logger.debug("Created new connection %r", connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py:574, in create_engine.<locals>.connect(connection_record)
+    573             return connection
+--> 574 return dialect.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py:598, in DefaultDialect.connect(self, *cargs, **cparams)
+    596 def connect(self, *cargs, **cparams):
+    597     # inherits the docstring from interfaces.Dialect.connect
+--> 598     return self.dbapi.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/psycopg2/__init__.py:122, in connect(dsn, connection_factory, cursor_factory, **kwargs)
+    121 dsn = _ext.make_dsn(dsn, **kwargs)
+--> 122 conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    123 if cursor_factory is not None:
+
+OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+OperationalError                          Traceback (most recent call last)
+Cell In[3], line 42, in get_database_connection(env_path)
+     41 try:
+---> 42     test_connection(engine)
+     43     print("Database connection tested successfully!")
+
+Cell In[3], line 17, in get_database_connection.<locals>.test_connection(engine)
+     14 """
+     15 Tests the database connection by executing a simple query.
+     16 """
+---> 17 with engine.connect() as connection:
+     18     connection.execute(text("SELECT 1"))
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3325, in Engine.connect(self, close_with_result)
+   3311 """Return a new :class:`_engine.Connection` object.
+   3312 
+   3313 The :class:`_engine.Connection` object is a facade that uses a DBAPI
+   (...)
+   3322 
+   3323 """
+-> 3325 return self._connection_cls(self, close_with_result=close_with_result)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:96, in Connection.__init__(self, engine, connection, close_with_result, _branch_from, _execution_options, _dispatch, _has_events, _allow_revalidate)
+     92 else:
+     93     self._dbapi_connection = (
+     94         connection
+     95         if connection is not None
+---> 96         else engine.raw_connection()
+     97     )
+     99     self._transaction = self._nested_transaction = None
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3404, in Engine.raw_connection(self, _connection)
+   3383 """Return a "raw" DBAPI connection from the connection pool.
+   3384 
+   3385 The returned object is a proxied version of the DBAPI
+   (...)
+   3402 
+   3403 """
+-> 3404 return self._wrap_pool_connect(self.pool.connect, _connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3374, in Engine._wrap_pool_connect(self, fn, connection)
+   3373 if connection is None:
+-> 3374     Connection._handle_dbapi_exception_noconnection(
+   3375         e, dialect, self
+   3376     )
+   3377 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:2208, in Connection._handle_dbapi_exception_noconnection(cls, e, dialect, engine)
+   2207 elif should_wrap:
+-> 2208     util.raise_(
+   2209         sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+   2210     )
+   2211 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3371, in Engine._wrap_pool_connect(self, fn, connection)
+   3370 try:
+-> 3371     return fn()
+   3372 except dialect.dbapi.Error as e:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:327, in Pool.connect(self)
+    320 """Return a DBAPI connection from the pool.
+    321 
+    322 The connection is instrumented such that when its
+   (...)
+    325 
+    326 """
+--> 327 return _ConnectionFairy._checkout(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:894, in _ConnectionFairy._checkout(cls, pool, threadconns, fairy)
+    893 if not fairy:
+--> 894     fairy = _ConnectionRecord.checkout(pool)
+    896     fairy._pool = pool
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:493, in _ConnectionRecord.checkout(cls, pool)
+    491 @classmethod
+    492 def checkout(cls, pool):
+--> 493     rec = pool._do_get()
+    494     try:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:145, in QueuePool._do_get(self)
+    144 except:
+--> 145     with util.safe_reraise():
+    146         self._dec_overflow()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:143, in QueuePool._do_get(self)
+    142 try:
+--> 143     return self._create_connection()
+    144 except:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:273, in Pool._create_connection(self)
+    271 """Called by subclasses to create a new ConnectionRecord."""
+--> 273 return _ConnectionRecord(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:388, in _ConnectionRecord.__init__(self, pool, connect)
+    387 if connect:
+--> 388     self.__connect()
+    389 self.finalize_callback = deque()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:690, in _ConnectionRecord.__connect(self)
+    689 except BaseException as e:
+--> 690     with util.safe_reraise():
+    691         pool.logger.debug("Error on connect(): %s", e)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:686, in _ConnectionRecord.__connect(self)
+    685 self.starttime = time.time()
+--> 686 self.dbapi_connection = connection = pool._invoke_creator(self)
+    687 pool.logger.debug("Created new connection %r", connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py:574, in create_engine.<locals>.connect(connection_record)
+    573             return connection
+--> 574 return dialect.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py:598, in DefaultDialect.connect(self, *cargs, **cparams)
+    596 def connect(self, *cargs, **cparams):
+    597     # inherits the docstring from interfaces.Dialect.connect
+--> 598     return self.dbapi.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/psycopg2/__init__.py:122, in connect(dsn, connection_factory, cursor_factory, **kwargs)
+    121 dsn = _ext.make_dsn(dsn, **kwargs)
+--> 122 conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    123 if cursor_factory is not None:
+
+OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+ConnectionError                           Traceback (most recent call last)
+Cell In[5], line 1
+----> 1 engine = get_database_connection()
+      2 # ! jupyter notebook --ServerApp.iopub_data_rate_limit=10000000
+
+Cell In[3], line 45, in get_database_connection(env_path)
+     43     print("Database connection tested successfully!")
+     44 except OperationalError as e:
+---> 45     raise ConnectionError(f"Database connection test failed: {e}")
+     47 return engine
+
+ConnectionError: Database connection test failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+; 222)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/resources/util_read_insert_data.py", line 17, in process_notebook_and_generate_csv
+    pm.execute_notebook(
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 131, in execute_notebook
+    raise_for_execution_errors(nb, output_path)
+  File "/home/airflow/.local/lib/python3.12/site-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+    raise error
+papermill.exceptions.PapermillExecutionError: 
+---------------------------------------------------------------------------
+Exception encountered at "In [5]":
+---------------------------------------------------------------------------
+OperationalError                          Traceback (most recent call last)
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3371, in Engine._wrap_pool_connect(self, fn, connection)
+   3370 try:
+-> 3371     return fn()
+   3372 except dialect.dbapi.Error as e:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:327, in Pool.connect(self)
+    320 """Return a DBAPI connection from the pool.
+    321 
+    322 The connection is instrumented such that when its
+   (...)
+    325 
+    326 """
+--> 327 return _ConnectionFairy._checkout(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:894, in _ConnectionFairy._checkout(cls, pool, threadconns, fairy)
+    893 if not fairy:
+--> 894     fairy = _ConnectionRecord.checkout(pool)
+    896     fairy._pool = pool
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:493, in _ConnectionRecord.checkout(cls, pool)
+    491 @classmethod
+    492 def checkout(cls, pool):
+--> 493     rec = pool._do_get()
+    494     try:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:145, in QueuePool._do_get(self)
+    144 except:
+--> 145     with util.safe_reraise():
+    146         self._dec_overflow()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:143, in QueuePool._do_get(self)
+    142 try:
+--> 143     return self._create_connection()
+    144 except:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:273, in Pool._create_connection(self)
+    271 """Called by subclasses to create a new ConnectionRecord."""
+--> 273 return _ConnectionRecord(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:388, in _ConnectionRecord.__init__(self, pool, connect)
+    387 if connect:
+--> 388     self.__connect()
+    389 self.finalize_callback = deque()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:690, in _ConnectionRecord.__connect(self)
+    689 except BaseException as e:
+--> 690     with util.safe_reraise():
+    691         pool.logger.debug("Error on connect(): %s", e)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:686, in _ConnectionRecord.__connect(self)
+    685 self.starttime = time.time()
+--> 686 self.dbapi_connection = connection = pool._invoke_creator(self)
+    687 pool.logger.debug("Created new connection %r", connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py:574, in create_engine.<locals>.connect(connection_record)
+    573             return connection
+--> 574 return dialect.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py:598, in DefaultDialect.connect(self, *cargs, **cparams)
+    596 def connect(self, *cargs, **cparams):
+    597     # inherits the docstring from interfaces.Dialect.connect
+--> 598     return self.dbapi.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/psycopg2/__init__.py:122, in connect(dsn, connection_factory, cursor_factory, **kwargs)
+    121 dsn = _ext.make_dsn(dsn, **kwargs)
+--> 122 conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    123 if cursor_factory is not None:
+
+OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+OperationalError                          Traceback (most recent call last)
+Cell In[3], line 42, in get_database_connection(env_path)
+     41 try:
+---> 42     test_connection(engine)
+     43     print("Database connection tested successfully!")
+
+Cell In[3], line 17, in get_database_connection.<locals>.test_connection(engine)
+     14 """
+     15 Tests the database connection by executing a simple query.
+     16 """
+---> 17 with engine.connect() as connection:
+     18     connection.execute(text("SELECT 1"))
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3325, in Engine.connect(self, close_with_result)
+   3311 """Return a new :class:`_engine.Connection` object.
+   3312 
+   3313 The :class:`_engine.Connection` object is a facade that uses a DBAPI
+   (...)
+   3322 
+   3323 """
+-> 3325 return self._connection_cls(self, close_with_result=close_with_result)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:96, in Connection.__init__(self, engine, connection, close_with_result, _branch_from, _execution_options, _dispatch, _has_events, _allow_revalidate)
+     92 else:
+     93     self._dbapi_connection = (
+     94         connection
+     95         if connection is not None
+---> 96         else engine.raw_connection()
+     97     )
+     99     self._transaction = self._nested_transaction = None
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3404, in Engine.raw_connection(self, _connection)
+   3383 """Return a "raw" DBAPI connection from the connection pool.
+   3384 
+   3385 The returned object is a proxied version of the DBAPI
+   (...)
+   3402 
+   3403 """
+-> 3404 return self._wrap_pool_connect(self.pool.connect, _connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3374, in Engine._wrap_pool_connect(self, fn, connection)
+   3373 if connection is None:
+-> 3374     Connection._handle_dbapi_exception_noconnection(
+   3375         e, dialect, self
+   3376     )
+   3377 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:2208, in Connection._handle_dbapi_exception_noconnection(cls, e, dialect, engine)
+   2207 elif should_wrap:
+-> 2208     util.raise_(
+   2209         sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+   2210     )
+   2211 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py:3371, in Engine._wrap_pool_connect(self, fn, connection)
+   3370 try:
+-> 3371     return fn()
+   3372 except dialect.dbapi.Error as e:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:327, in Pool.connect(self)
+    320 """Return a DBAPI connection from the pool.
+    321 
+    322 The connection is instrumented such that when its
+   (...)
+    325 
+    326 """
+--> 327 return _ConnectionFairy._checkout(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:894, in _ConnectionFairy._checkout(cls, pool, threadconns, fairy)
+    893 if not fairy:
+--> 894     fairy = _ConnectionRecord.checkout(pool)
+    896     fairy._pool = pool
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:493, in _ConnectionRecord.checkout(cls, pool)
+    491 @classmethod
+    492 def checkout(cls, pool):
+--> 493     rec = pool._do_get()
+    494     try:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:145, in QueuePool._do_get(self)
+    144 except:
+--> 145     with util.safe_reraise():
+    146         self._dec_overflow()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/impl.py:143, in QueuePool._do_get(self)
+    142 try:
+--> 143     return self._create_connection()
+    144 except:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:273, in Pool._create_connection(self)
+    271 """Called by subclasses to create a new ConnectionRecord."""
+--> 273 return _ConnectionRecord(self)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:388, in _ConnectionRecord.__init__(self, pool, connect)
+    387 if connect:
+--> 388     self.__connect()
+    389 self.finalize_callback = deque()
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:690, in _ConnectionRecord.__connect(self)
+    689 except BaseException as e:
+--> 690     with util.safe_reraise():
+    691         pool.logger.debug("Error on connect(): %s", e)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py:70, in safe_reraise.__exit__(self, type_, value, traceback)
+     69     if not self.warn_only:
+---> 70         compat.raise_(
+     71             exc_value,
+     72             with_traceback=exc_tb,
+     73         )
+     74 else:
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py:211, in raise_(***failed resolving arguments***)
+    210 try:
+--> 211     raise exception
+    212 finally:
+    213     # credit to
+    214     # https://cosmicpercolator.com/2016/01/13/exception-leaks-in-python-2-and-3/
+    215     # as the __traceback__ object creates a cycle
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/pool/base.py:686, in _ConnectionRecord.__connect(self)
+    685 self.starttime = time.time()
+--> 686 self.dbapi_connection = connection = pool._invoke_creator(self)
+    687 pool.logger.debug("Created new connection %r", connection)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/create.py:574, in create_engine.<locals>.connect(connection_record)
+    573             return connection
+--> 574 return dialect.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py:598, in DefaultDialect.connect(self, *cargs, **cparams)
+    596 def connect(self, *cargs, **cparams):
+    597     # inherits the docstring from interfaces.Dialect.connect
+--> 598     return self.dbapi.connect(*cargs, **cparams)
+
+File ~/.local/lib/python3.12/site-packages/psycopg2/__init__.py:122, in connect(dsn, connection_factory, cursor_factory, **kwargs)
+    121 dsn = _ext.make_dsn(dsn, **kwargs)
+--> 122 conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+    123 if cursor_factory is not None:
+
+OperationalError: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+
+During handling of the above exception, another exception occurred:
+
+ConnectionError                           Traceback (most recent call last)
+Cell In[5], line 1
+----> 1 engine = get_database_connection()
+      2 # ! jupyter notebook --ServerApp.iopub_data_rate_limit=10000000
+
+Cell In[3], line 45, in get_database_connection(env_path)
+     43     print("Database connection tested successfully!")
+     44 except OperationalError as e:
+---> 45     raise ConnectionError(f"Database connection test failed: {e}")
+     47 return engine
+
+ConnectionError: Database connection test failed: (psycopg2.OperationalError) connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+
+[2024-12-09T05:18:17.284+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-12-09T05:18:17.301+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T05:18:17.303+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

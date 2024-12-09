@@ -1,0 +1,34 @@
+[2024-12-09T05:17:54.860+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-12-09T05:17:54.875+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_pipeline_dag.task_ingest_statuses_data manual__2024-12-09T05:16:55.618725+00:00 [queued]>
+[2024-12-09T05:17:54.884+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_pipeline_dag.task_ingest_statuses_data manual__2024-12-09T05:16:55.618725+00:00 [queued]>
+[2024-12-09T05:17:54.885+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 1
+[2024-12-09T05:17:54.897+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): task_ingest_statuses_data> on 2024-12-09 05:16:55.618725+00:00
+[2024-12-09T05:17:54.904+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=183) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-12-09T05:17:54.906+0000] {standard_task_runner.py:72} INFO - Started process 192 to run task
+[2024-12-09T05:17:54.905+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'data_pipeline_dag', 'task_ingest_statuses_data', 'manual__2024-12-09T05:16:55.618725+00:00', '--job-id', '60', '--raw', '--subdir', 'DAGS_FOLDER/e2e_pipeline.py', '--cfg-path', '/tmp/tmp2adknq3o']
+[2024-12-09T05:17:54.908+0000] {standard_task_runner.py:105} INFO - Job 60: Subtask task_ingest_statuses_data
+[2024-12-09T05:17:54.948+0000] {task_command.py:467} INFO - Running <TaskInstance: data_pipeline_dag.task_ingest_statuses_data manual__2024-12-09T05:16:55.618725+00:00 [running]> on host d1b18052a0fe
+[2024-12-09T05:17:55.025+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='data_pipeline_dag' AIRFLOW_CTX_TASK_ID='task_ingest_statuses_data' AIRFLOW_CTX_EXECUTION_DATE='2024-12-09T05:16:55.618725+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-12-09T05:16:55.618725+00:00'
+[2024-12-09T05:17:55.026+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-12-09T05:17:55.045+0000] {execute.py:83} INFO - Input Notebook:  /opt/***/dataset/cleanup_statuses.ipynb
+[2024-12-09T05:17:55.046+0000] {execute.py:84} INFO - Output Notebook: /opt/***/dataset/output_cleanup_statuses.ipynb
+[2024-12-09T05:17:55.085+0000] {execute.py:97} WARNING - Passed unknown parameter: file_path
+[2024-12-09T05:17:55.086+0000] {execute.py:97} WARNING - Passed unknown parameter: sheet_name
+[2024-12-09T05:17:55.090+0000] {parameterize.py:114} WARNING - Input notebook does not contain a cell with tag 'parameters'
+[2024-12-09T05:17:55.102+0000] {logging_mixin.py:190} WARNING - Executing:   0%|          | 0/4 [00:00<?, ?cell/s]
+[2024-12-09T05:17:57.133+0000] {clientwrap.py:44} INFO - Executing notebook with kernel: python3
+[2024-12-09T05:17:57.171+0000] {logging_mixin.py:190} WARNING - Executing:  25%|##5       | 1/4 [00:02<00:06,  2.07s/cell]
+[2024-12-09T05:17:57.698+0000] {logging_mixin.py:190} WARNING - Executing:  50%|#####     | 2/4 [00:02<00:02,  1.16s/cell]
+[2024-12-09T05:18:05.954+0000] {logging_mixin.py:190} WARNING - Executing:  75%|#######5  | 3/4 [00:10<00:04,  4.40s/cell]
+[2024-12-09T05:18:06.457+0000] {logging_mixin.py:190} WARNING - Executing: 100%|##########| 4/4 [00:11<00:00,  2.86s/cell]
+[2024-12-09T05:18:06.879+0000] {logging_mixin.py:190} WARNING - Executing: 100%|##########| 4/4 [00:11<00:00,  2.94s/cell]
+[2024-12-09T05:18:07.056+0000] {base.py:84} INFO - Retrieving connection 'external_postgres'
+[2024-12-09T05:18:09.692+0000] {logging_mixin.py:190} INFO - Data from sheet 'Statuses' loaded into table 'l0_statuses' after cleanup.
+[2024-12-09T05:18:09.697+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-12-09T05:18:09.710+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-12-09T05:18:09.711+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=data_pipeline_dag, task_id=task_ingest_statuses_data, run_id=manual__2024-12-09T05:16:55.618725+00:00, execution_date=20241209T051655, start_date=20241209T051754, end_date=20241209T051809
+[2024-12-09T05:18:09.755+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-12-09T05:18:09.777+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-12-09T05:18:09.779+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
