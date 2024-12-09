@@ -1,3 +1,12 @@
+# Tech Stack:
+ - Airflow
+ - Postgres
+ - Jupyter Notebook
+ - Pandas
+ - Matplotlib
+ - Seaborn
+ - Papermil
+   
 # Airflow Data Pipeline
 
 This project demonstrates an end-to-end data pipeline using Apache Airflow for data ingestion, transformation, and visualization.
